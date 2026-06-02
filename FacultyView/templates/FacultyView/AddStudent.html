@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajouter un Étudiant</title>
+    <link rel="stylesheet" href="{% static 'FacultyView/Index_Style.css' %}" />
+    <style>
+      .form-card {
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        padding: 36px 40px;
+        width: 440px;
+        margin: 60px auto;
+      }
+
+      .form-card h2 {
+        color: #2e7d32;
+        font-size: 22px;
+        margin-bottom: 24px;
+        text-align: center;
+        border-bottom: 2px solid #4caf50;
+        padding-bottom: 12px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 6px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #c8e6c9;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.2s;
+        background-color: #f9fdf9;
+      }
+
+      .form-group input:focus {
+        border-color: #4caf50;
+        background-color: #fff;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .form-actions a {
+        text-decoration: none;
+        flex: 1;
+      }
+
+      .form-actions button {
+        width: 100%;
+        margin-top: 0;
+      }
+
+      .btn-cancel {
+        background-color: #546e7a;
+      }
+
+      .btn-cancel:hover {
+        background-color: #37474f;
+      }
+
+      .error-msg {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #ef9a9a;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 14px;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Portail de Présence</h1>
+      <h2>Ajouter un Étudiant</h2>
+    </header>
+
+    <main style="display:flex; justify-content:center; align-items:flex-start; padding-top:20px;">
+      <div class="form-card">
+        <h2>➕ Nouvel Étudiant</h2>
+
+        {% if error %}
+        <div class="error-msg">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label for="full_name">Nom complet</label>
+            <input
+              type="text"
+              id="full_name"
+              name="full_name"
+              placeholder="Ex : Ahmed Benali"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="matricule">Matricule</label>
+            <input
+              type="text"
+              id="matricule"
+              name="matricule"
+              placeholder="Ex : 2025001"
+              required
+            />
+          </div>
+
+          <div class="form-actions">
+            <a href="{% url 'faculty_view' %}">
+              <button type="button" class="btn-cancel">✖ Annuler</button>
+            </a>
+            <button type="submit">✔ Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; Système de Présence QR 2026</p>
+    </footer>
+  </body>
+</html>
